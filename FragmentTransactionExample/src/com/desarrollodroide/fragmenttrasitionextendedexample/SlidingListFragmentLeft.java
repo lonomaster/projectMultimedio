@@ -106,7 +106,7 @@ public class SlidingListFragmentLeft extends ListFragment {
 			
 			
 			//TextView_descripcion.setText(result2);
-			TextView_descripcion.setText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.");
+			TextView_descripcion.setText("ONeLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.");
 			TextView_descripcion.setTypeface(champagne_italic);
 			
 			//textView_1.setText("My custom element #" + position);
