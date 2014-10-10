@@ -11,13 +11,15 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int Description=0x7f040000;
-        public static final int Id=0x7f040001;
-        public static final int list_divider=0x7f040002;
-        public static final int list_row_end_color=0x7f040004;
-        public static final int list_row_hover_end_color=0x7f040006;
-        public static final int list_row_hover_start_color=0x7f040005;
-        public static final int list_row_start_color=0x7f040003;
+        public static final int Description=0x7f040002;
+        public static final int Id=0x7f040003;
+        public static final int Name=0x7f040000;
+        public static final int Price=0x7f040001;
+        public static final int list_divider=0x7f040004;
+        public static final int list_row_end_color=0x7f040006;
+        public static final int list_row_hover_end_color=0x7f040008;
+        public static final int list_row_hover_start_color=0x7f040007;
+        public static final int list_row_start_color=0x7f040005;
     }
     public static final class dimen {
         public static final int Description=0x7f050002;
@@ -32,35 +34,31 @@ public final class R {
         public static final int activity_horizontal_margin=0x7f050004;
     }
     public static final class drawable {
-        public static final int fondo=0x7f020000;
-        public static final int fondo2=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int list_row_bg=0x7f020003;
-        public static final int list_row_bg_hover=0x7f020004;
-        public static final int list_row_selector=0x7f020005;
+        public static final int button=0x7f020000;
+        public static final int fondo=0x7f020001;
+        public static final int fondo2=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int list_row_bg=0x7f020004;
+        public static final int list_row_bg_hover=0x7f020005;
+        public static final int list_row_selector=0x7f020006;
     }
     public static final class id {
-        public static final int Description=0x7f09000a;
-        public static final int Direccion=0x7f09000d;
-        public static final int Firstname=0x7f09000e;
-        public static final int Id=0x7f090008;
-        public static final int Lastname=0x7f09000f;
-        public static final int Latitud=0x7f090011;
-        public static final int Longitud=0x7f090012;
-        public static final int Mapa=0x7f090007;
-        public static final int Name=0x7f090005;
+        public static final int Description=0x7f090008;
+        public static final int Direccion=0x7f09000b;
+        public static final int Mapa=0x7f09000d;
+        public static final int Name=0x7f090006;
         public static final int Name2=0x7f090003;
-        public static final int Picturepath=0x7f090006;
-        public static final int Price=0x7f090009;
-        public static final int Telefono=0x7f090010;
-        public static final int Tienda=0x7f09000b;
-        public static final int User=0x7f09000c;
-        public static final int action_settings=0x7f090014;
+        public static final int Picturepath=0x7f090005;
+        public static final int Price=0x7f090007;
+        public static final int Telefono=0x7f09000c;
+        public static final int Tienda=0x7f090009;
+        public static final int User=0x7f09000a;
+        public static final int action_settings=0x7f09000f;
         public static final int button1=0x7f090000;
         public static final int columnas=0x7f090002;
         public static final int editText1=0x7f090004;
         public static final int list=0x7f090001;
-        public static final int thumbnail=0x7f090013;
+        public static final int thumbnail=0x7f09000e;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -102,5 +100,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int btnStyleSeagull=0x7f070002;
     }
 }

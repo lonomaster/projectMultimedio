@@ -194,7 +194,7 @@ public class MainActivity extends Activity {
     	
     	//Obtenemos la �ltima posici�n conocida
     	Location loc = 
-    		locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    		locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     	
     	//Mostramos la �ltima posici�n conocida
     	mostrarPosicion(loc);

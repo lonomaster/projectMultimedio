@@ -77,7 +77,7 @@ public class CustomListAdapter extends BaseAdapter {
 				.findViewById(R.id.thumbnail);
 		TextView Name = (TextView) convertView.findViewById(R.id.Name);
 		TextView Price = (TextView) convertView.findViewById(R.id.Price);
-		TextView Description = (TextView) convertView.findViewById(R.id.Description);
+		//TextView Description = (TextView) convertView.findViewById(R.id.Description);
 		//TextView Id = (TextView) convertView.findViewById(R.id.releaseId);
 
 		// getting movie data for the row
@@ -90,9 +90,9 @@ public class CustomListAdapter extends BaseAdapter {
 		Name.setText(m.getName());
 		
 		// Price
-		Price.setText("Price: " + String.valueOf(m.getPrice()));
+		Price.setText("$" + String.valueOf(m.getPrice()));
 		
-		Description.setText("Descripcion: " + String.valueOf(m.getDescription()));
+		//Description.setText("Descripcion: " + String.valueOf(m.getDescription()));
 
 		// release Id
 	//	Id.setText(String.valueOf(m.getId()));

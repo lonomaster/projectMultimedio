@@ -1,82 +1,117 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-     <TextView
-        android:id="@+id/Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-       <!-- Thumbnail Image -->
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent"
+ android:layout_gravity="center"
+ android:orientation="vertical"
+ tools:context=".LinearLayout" >
+ 
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
+
+    <!-- Thumbnail Image -->
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/Picturepath"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="8dp" />
-    
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/Mapa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="8dp" />
-       <TextView
-        android:id="@+id/Id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-        <TextView
-        android:id="@+id/Price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-         <TextView
-        android:id="@+id/Description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-          <TextView
-        android:id="@+id/Tienda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-           <TextView
-        android:id="@+id/User"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-            <TextView
-        android:id="@+id/Direccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-             <TextView
-        android:id="@+id/Firstname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-              <TextView
-        android:id="@+id/Lastname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-               <TextView
-        android:id="@+id/Telefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-                <TextView
-        android:id="@+id/Latitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-                 <TextView
-        android:id="@+id/Longitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
 
-</LinearLayout>
+    <!-- Movie Name -->
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Picturepath"
+        android:layout_toRightOf="@+id/Picturepath"
+        android:textColor="@color/Name"
+        android:textSize="@dimen/Name"
+        android:textStyle="bold" />
+
+    <!-- Price -->
+    <TextView
+        android:id="@+id/Price"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Name"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/Picturepath"
+        android:textColor="@color/Price"
+        android:textSize="@dimen/Price" />
+    
+    <!-- Description -->
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Price"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/Picturepath"
+        android:textColor="@color/Description"
+        android:textSize="@dimen/Description" />
+    
+     <!-- Description -->
+    <TextView
+        android:id="@+id/Tienda"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Description"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/Picturepath"
+        android:textColor="@color/Description"
+        android:textSize="@dimen/Description" />
+    
+     <!-- Description -->
+    <TextView
+        android:id="@+id/User"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Tienda"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/Picturepath"
+        android:textColor="@color/Description"
+        android:textSize="@dimen/Description" />
+    
+     <!-- Description -->
+    <TextView
+        android:id="@+id/Direccion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/User"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/Picturepath"
+        android:textColor="@color/Description"
+        android:textSize="@dimen/Description" />
+    
+      <!-- Description -->
+    <TextView
+        android:id="@+id/Telefono"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Direccion"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/Picturepath"
+        android:textColor="@color/Description"
+        android:textSize="@dimen/Description" />
+
+
+
+
+</RelativeLayout>
+   <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >  
+ <com.android.volley.toolbox.NetworkImageView
+ android:id="@+id/Mapa"
+ android:layout_width="wrap_content"
+ android:layout_height="fill_parent"
+ android:layout_centerHorizontal="true"
+ android:layout_marginRight="8dp" />
+</RelativeLayout>
+ </LinearLayout>
+
