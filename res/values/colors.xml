@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="Name">#31D2DE</color>
+    <color name="Name">#10C428</color>
     <color name="Price">#F5BE27</color>
-    <color name="Description">#666666</color>
+    <color name="Description">#5E5E5E</color>
     <color name="Id">#888888</color>
     <color name="list_divider">#d9d9d9</color>
     <color name="list_row_start_color">#ffffff</color>

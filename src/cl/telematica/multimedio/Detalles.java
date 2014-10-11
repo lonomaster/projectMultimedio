@@ -75,7 +75,7 @@ protected void onCreate(Bundle savedInstanceState) {
             JSONObject json = new JSONObject();
 
             try {
-                HttpPost post = new HttpPost("http://www.connectic.cl/superoffer/index.php/admin/login/actualizar/");
+                HttpPost post = new HttpPost("http://superoffer.cl/admin/login/actualizar/");
                
                                    
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);  

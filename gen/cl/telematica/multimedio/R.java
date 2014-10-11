@@ -43,22 +43,21 @@ public final class R {
         public static final int list_row_selector=0x7f020006;
     }
     public static final class id {
-        public static final int Description=0x7f090008;
-        public static final int Direccion=0x7f09000b;
-        public static final int Mapa=0x7f09000d;
-        public static final int Name=0x7f090006;
-        public static final int Name2=0x7f090003;
-        public static final int Picturepath=0x7f090005;
-        public static final int Price=0x7f090007;
-        public static final int Telefono=0x7f09000c;
-        public static final int Tienda=0x7f090009;
-        public static final int User=0x7f09000a;
-        public static final int action_settings=0x7f09000f;
-        public static final int button1=0x7f090000;
-        public static final int columnas=0x7f090002;
-        public static final int editText1=0x7f090004;
-        public static final int list=0x7f090001;
-        public static final int thumbnail=0x7f09000e;
+        public static final int Description=0x7f090007;
+        public static final int Direccion=0x7f09000a;
+        public static final int Mapa=0x7f09000c;
+        public static final int Name=0x7f090005;
+        public static final int Name2=0x7f090002;
+        public static final int Picturepath=0x7f090004;
+        public static final int Price=0x7f090006;
+        public static final int Telefono=0x7f09000b;
+        public static final int Tienda=0x7f090008;
+        public static final int User=0x7f090009;
+        public static final int action_settings=0x7f09000e;
+        public static final int columnas=0x7f090001;
+        public static final int editText1=0x7f090003;
+        public static final int list=0x7f090000;
+        public static final int thumbnail=0x7f09000d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

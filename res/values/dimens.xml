@@ -1,8 +1,8 @@
 <resources>
         
-    <dimen name="Name">25dp</dimen>
-    <dimen name="Price">20dip</dimen>
-    <dimen name="Description">15dip</dimen>
-    <dimen name="Id">12dip</dimen>
+    <dimen name="Name">20dp</dimen>
+    <dimen name="Price">17dip</dimen>
+    <dimen name="Description">12dip</dimen>
+    <dimen name="Id">10dip</dimen>
 
 </resources>

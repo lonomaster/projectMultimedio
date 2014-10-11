@@ -45,6 +45,8 @@ import android.widget.Toast;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView.OnItemClickListener;
@@ -63,7 +65,7 @@ public class MainActivity extends Activity {
 	private static final String TAG = MainActivity.class.getSimpleName();
 
 	// Movies json url
-	public String url = "http://www.connectic.cl/superoffer/index.php/admin/login/products/";
+	public String url = "http://superoffer.cl/admin/login/products/";
 	private ProgressDialog pDialog;
 	private List<Movie> movieList = new ArrayList<Movie>();
 	private ListView listView;
@@ -95,16 +97,9 @@ public class MainActivity extends Activity {
 		pDialog.setMessage("Loading...");
 		pDialog.show();
 		
-		//editText.setInputType(InputType.TYPE_NULL);
-        final Button btnHola = (Button)findViewById(R.id.button1);
+	       
         
-        //Implementamos el evento �click� del bot�n
-        btnHola.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-            	adapter.destroy();
-            	 comenzarLocalizacion();
-            }
-        });
+
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
                  public void onItemClick(AdapterView<?> a, View v, int position, long id) { 
@@ -186,6 +181,7 @@ public class MainActivity extends Activity {
 	}
 
 	
+	
 	private void comenzarLocalizacion()
     {
     	//Obtenemos una referencia al LocationManager
@@ -257,8 +253,19 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		MenuItem item = menu.findItem(R.id.action_settings);
+        item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+            	adapter.destroy();
+           	 comenzarLocalizacion();
+                return true;
+            }
+        });
+        return true;
 	}
+	
 	
 	
 	private class MiTareaAsincrona extends AsyncTask<Double, Integer, Boolean> {
