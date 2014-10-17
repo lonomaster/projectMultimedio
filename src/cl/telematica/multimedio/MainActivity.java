@@ -4,6 +4,7 @@ import cl.telematica.multimedio.adater.CustomListAdapter;
 import cl.telematica.multimedio.app.AppController;
 import cl.telematica.multimedio.model.Movie;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -36,10 +38,12 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.location.Location;
@@ -87,7 +91,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		// changing action bar color
+				getActionBar().setBackgroundDrawable(
+						new ColorDrawable(Color.parseColor("#00A0B5")));
 		listView = (ListView) findViewById(R.id.list);
 		adapter = new CustomListAdapter(this, movieList);
 		listView.setAdapter(adapter);
@@ -118,6 +124,7 @@ public class MainActivity extends Activity {
             	Bundle b = new Bundle(); 
             	b.putString("name", obj_itemDetails.getName());
             	b.putString("picturepath", obj_itemDetails.getPicturepath());
+            	b.putString("logo", obj_itemDetails.getLogo());
             	b.putString("id", obj_itemDetails.getId());
             	b.putString("price", obj_itemDetails.getPrice());
             	b.putString("description", obj_itemDetails.getDescription());
@@ -141,7 +148,6 @@ public class MainActivity extends Activity {
         comenzarLocalizacion();
 		
 		final EditText editTxt = (EditText) findViewById(R.id.editText1); 
-		final TextView text = (TextView) findViewById(R.id.Name2); 
 		editTxt.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -170,9 +176,7 @@ public class MainActivity extends Activity {
 	
 		
 		
-		// changing action bar color
-		getActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.parseColor("#1b1b1b")));
+		
 		
 		
 		 
@@ -249,7 +253,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	@Override
+/*	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -264,7 +268,37 @@ public class MainActivity extends Activity {
             }
         });
         return true;
+	}*/
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+
+		return super.onCreateOptionsMenu(menu);
 	}
+	
+	/**
+	 * On selecting action bar icons
+	 * */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Take appropriate action for each action item click
+		switch (item.getItemId()) {
+
+		case R.id.action_refresh:
+			// refresh
+			adapter.destroy();
+		  	 comenzarLocalizacion();
+			return true;
+		case R.id.action_help:
+			// help action
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
 	
 	
 	
@@ -323,6 +357,7 @@ public class MainActivity extends Activity {
     									Movie movie = new Movie();
     									movie.setName(obj.getString("name"));
     									movie.setPicturepath(obj.getString("images"));
+    									movie.setLogo(obj.getString("logo"));
     									movie.setPrice(obj.getString("price"));
     											//.doubleValue());
     									movie.setId(obj.getString("id"));

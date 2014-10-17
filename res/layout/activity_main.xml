@@ -2,11 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/list_row_selector"
+    android:background="@color/feed_bg"
     tools:context=".MainActivity" >
 
- 
+ <!-- 
+    <GridView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:columnWidth="150dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        android:drawSelectorOnTop="true"
+        android:stretchMode="columnWidth" >
+    </GridView>
+    -->
+    
 
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+         android:layout_marginBottom="80dp"
+        android:background="@color/feed_bg"
+        android:divider="@null" />
+
+
+<!-- 
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
@@ -14,24 +39,55 @@
         android:layout_marginBottom="70dp"
         android:divider="@color/list_divider"
         android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_row_selector" />
+        android:listSelector="@drawable/list_row_selector" /> -->
 
    <LinearLayout
         android:id="@+id/columnas"
         android:layout_width="fill_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:layout_alignParentBottom="true"
-        android:background="#7FE8F0"
         android:orientation="horizontal" >
+        
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/feed_item_margin"
+        android:layout_marginRight="@dimen/feed_item_margin"
+        android:layout_marginTop="@dimen/feed_item_margin"
+         android:layout_marginBottom="@dimen/feed_item_margin"
+        android:background="@drawable/bg_parent_rounded_corner2"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/feed_item_padding_top_bottom"
+        android:paddingTop="@dimen/feed_item_padding_top_bottom" >
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_padding_left_right"
+            android:paddingRight="@dimen/feed_item_padding_left_right" >
+
+            
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+               android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd" >
+<!-- 
         <TextView
             android:id="@+id/Name2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Filtro:"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
 
-
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_action_search" />
 
       <EditText
             android:id="@+id/editText1"
@@ -44,4 +100,10 @@
        
     </LinearLayout>
 
+               </LinearLayout>
+            
+           </LinearLayout>
+        
+          </LinearLayout>
+       
 </RelativeLayout>

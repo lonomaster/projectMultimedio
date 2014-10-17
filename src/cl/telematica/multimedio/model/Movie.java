@@ -5,6 +5,7 @@ package cl.telematica.multimedio.model;
 public class Movie {
 	private String Name;
 	private String Picturepath;
+	private String Logo;
 	private String Id;
 	private String Price;
 	private String Description;
@@ -44,6 +45,14 @@ public class Movie {
 
 	public void setPicturepath(String Picturepath) {
 		this.Picturepath = Picturepath;
+	}
+	
+	public String getLogo() {
+		return Logo;
+	}
+	
+	public void setLogo(String Logo) {
+		this.Logo = Logo;
 	}
 
 	public String getId() {
