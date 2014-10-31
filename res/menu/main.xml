@@ -9,16 +9,52 @@
 
    
     <!-- Refresh -->
+    <item android:id="@+id/action_map"
+          android:icon="@drawable/ic_action_place"
+          android:title="Map" 
+          android:showAsAction="ifRoom" />
+    
     <item android:id="@+id/action_refresh"
           android:icon="@drawable/ic_action_refresh"
           android:title="Refresh" 
           android:showAsAction="ifRoom" />
     
     <!-- Help -->
-    <item android:id="@+id/action_help"
-          android:icon="@drawable/ic_action_help"
-          android:title="Ayuda" 
+    <item android:id="@+id/all"
+          android:title="Todas" 
           android:showAsAction="never"/>
+    <!-- Help -->
+    <item android:id="@+id/cate1"
+          android:title="Cate1" 
+          android:showAsAction="never"/>
+    
+    
+        <!-- Help -->
+    <item android:id="@+id/cate2"
+          android:title="Cate2" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate3"
+          android:title="Cate3" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate4"
+          android:title="Cate4" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate5"
+          android:title="Cate5" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate6"
+          android:title="Cate6" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate7"
+          android:title="Cate7" 
+          android:showAsAction="never"/>
+    
+    
 
 </menu>
 

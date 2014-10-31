@@ -25,9 +25,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -46,6 +48,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -69,23 +72,29 @@ public class MainActivity extends Activity {
 	private static final String TAG = MainActivity.class.getSimpleName();
 
 	// Movies json url
-	public String url = "http://superoffer.cl/admin/login/products/";
+	
 	private ProgressDialog pDialog;
-	private List<Movie> movieList = new ArrayList<Movie>();
+	private ArrayList<Movie> movieList = new ArrayList<Movie>();
 	private ListView listView;
 	private CustomListAdapter adapter;
 
 	private LocationManager locManager;
 	private LocationListener locListener;
+	private LocationManager manejador;
+	private Location mejorLocaliz;
 	private TextView lblLatitud; 
 	private TextView lblLongitud;
 	private TextView lblPrecision;
 	private TextView lblEstado;
 	private EditText editText;
+	public int cate_actual = 200;
 	public String currentLocation = "Direccion";
-	public String latitud = "";
-	public String longitud = "";
-	private MiTareaAsincrona tarea1;
+	public double latitud;
+	public double longitud;
+	public String lat;
+	public String lon;
+	private boolean mensaje = true;
+	public String JsonResponse = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,18 +102,18 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		// changing action bar color
 				getActionBar().setBackgroundDrawable(
-						new ColorDrawable(Color.parseColor("#00A0B5")));
+						new ColorDrawable(Color.parseColor("#33B5E5")));
 		listView = (ListView) findViewById(R.id.list);
 		adapter = new CustomListAdapter(this, movieList);
 		listView.setAdapter(adapter);
 
 		pDialog = new ProgressDialog(this);
 		// Showing progress dialog before making http request
-		pDialog.setMessage("Loading...");
+		pDialog.setMessage("Localizando...");
 		pDialog.show();
 		
 	       
-        
+		comenzarLocalizacion();
 
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -122,7 +131,7 @@ public class MainActivity extends Activity {
             	
             	//Creamos la informaci�n a pasar entre actividades
             	Bundle b = new Bundle(); 
-            	b.putString("name", obj_itemDetails.getName());
+            	
             	b.putString("picturepath", obj_itemDetails.getPicturepath());
             	b.putString("logo", obj_itemDetails.getLogo());
             	b.putString("id", obj_itemDetails.getId());
@@ -134,9 +143,18 @@ public class MainActivity extends Activity {
             	b.putString("firstname", obj_itemDetails.getFirstname());
             	b.putString("lastname", obj_itemDetails.getLastname());
             	b.putString("telefono", obj_itemDetails.getTelefono());
+            	b.putString("name", obj_itemDetails.getName());
             	b.putString("latitud", obj_itemDetails.getLatitud());
             	b.putString("longitud", obj_itemDetails.getLongitud());
+            	b.putString("latitud", obj_itemDetails.getLatitud());
+            	b.putString("lat",lat);
+            	b.putString("lon", lon);
+            	b.putString("datos", JsonResponse);
+            	//b.putSerializable("datos", movieList);
             	
+      
+            	
+            //	b.pu .putStringArrayList("list", movieList);
             	//A�adimos la informaci�n al intent
             	intent.putExtras(b);
             	
@@ -145,7 +163,7 @@ public class MainActivity extends Activity {
              }  
       });
         
-        comenzarLocalizacion();
+        
 		
 		final EditText editTxt = (EditText) findViewById(R.id.editText1); 
 		editTxt.addTextChangedListener(new TextWatcher() {
@@ -188,7 +206,8 @@ public class MainActivity extends Activity {
 	
 	private void comenzarLocalizacion()
     {
-    	//Obtenemos una referencia al LocationManager
+	
+		//Obtenemos una referencia al LocationManager
     	locManager = 
     		(LocationManager)getSystemService(Context.LOCATION_SERVICE);
     	
@@ -196,53 +215,56 @@ public class MainActivity extends Activity {
     	Location loc = 
     		locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     	
-    	//Mostramos la �ltima posici�n conocida
-    	mostrarPosicion(loc);
     	
     	//Nos registramos para recibir actualizaciones de la posici�n
-    	/*locListener = new LocationListener() {
+    	locListener = new LocationListener() {
 	    	public void onLocationChanged(Location location) {
+	    		
+	    		Toast.makeText(MainActivity.this, "Ubicación Localizada", Toast.LENGTH_SHORT).show();
 	    		mostrarPosicion(location);
 	    	}
 	    	public void onProviderDisabled(String provider){
-	    		lblEstado.setText("Provider OFF");
+	    		Log.i("", "Provider Status: OFF ");
 	    	}
 	    	public void onProviderEnabled(String provider){
-	    		lblEstado.setText("Provider ON ");
+	    		Log.i("", "Provider Status: ON ");
 	    	}
 	    	public void onStatusChanged(String provider, int status, Bundle extras){
 	    		Log.i("", "Provider Status: " + status);
-	    		lblEstado.setText("Provider Status: " + status);
+	    		
 	    	}
     	};
     	
     	locManager.requestLocationUpdates(
-    			LocationManager.GPS_PROVIDER, 30000, 0, locListener);*/
+    			LocationManager.NETWORK_PROVIDER, 60000,200, locListener);
+    	
+   
     }
 
     private void mostrarPosicion(Location loc) {
     	if(loc != null)
     	{
-    		   	
-    		tarea1 = new MiTareaAsincrona();
-			tarea1.execute(loc.getLatitude(),loc.getLongitude());
-			latitud = String.valueOf(loc.getLatitude());
-			longitud = String.valueOf(loc.getLongitude());
-    		/*lblLatitud.setText("Latitud: "  + String.valueOf(loc.getLatitude()));
-    		lblLongitud.setText("Longitud: " + String.valueOf(loc.getLongitude()));
-    		lblPrecision.setText("Precision: " + String.valueOf(loc.getAccuracy()));*/
+    		hidePDialog();
+    		//tarea1 = new MiTareaAsincrona();
+			//tarea1.execute(loc.getLatitude(),loc.getLongitude());
+    		latitud = loc.getLatitude();
+			longitud = loc.getLongitude();	
+			lat = String.valueOf(loc.getLatitude());
+			lon = String.valueOf(loc.getLongitude());	
+			
+			cate_actual = 200;
+			loadContent();
+			adapter.notifyDataSetChanged();
     		Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongitude())));
     	}
-    	else
-    	{
-    		/*lblLatitud.setText("Latitud: (sin_datos)");
-    		lblLongitud.setText("Longitud: (sin_datos)");
-    		lblPrecision.setText("Precision: (sin_datos)");*/
-    	}
+    	else Toast.makeText(MainActivity.this, "Ubicación no Localizada", Toast.LENGTH_SHORT).show();
+		
+ 
     }
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		locManager.removeUpdates(locListener); 
 		hidePDialog();
 	}
 
@@ -286,14 +308,78 @@ public class MainActivity extends Activity {
 		// Take appropriate action for each action item click
 		switch (item.getItemId()) {
 
-		case R.id.action_refresh:
-			// refresh
-			adapter.destroy();
-		  	 comenzarLocalizacion();
+		case R.id.action_map:
+			
+			//Creamos el Intent
+        	Intent intent = new Intent(MainActivity.this, Mapa.class);
+        	
+        	//Creamos la informaci�n a pasar entre actividades
+        	Bundle b = new Bundle(); 
+        	
+        
+        	b.putString("name", "432");
+        	b.putString("longitud", "324");
+        	b.putString("latitud","324");
+        	b.putString("lat",lat);
+        	b.putString("lon", lon);
+        	b.putString("datos", JsonResponse);
+        	//b.putSerializable("datos", movieList);
+        	
+  
+        	
+        //	b.pu .putStringArrayList("list", movieList);
+        	//A�adimos la informaci�n al intent
+        	intent.putExtras(b);
+        	
+        	//Iniciamos la nueva actividad
+            startActivity(intent);  
+            return true;
+		case R.id.action_refresh:	
+            cate_actual = 200;
+			loadContent();
+			adapter.notifyDataSetChanged();
 			return true;
-		case R.id.action_help:
-			// help action
+		case R.id.all:
+			cate_actual = 200;
+			loadContent();
+			adapter.notifyDataSetChanged();
 			return true;
+		case R.id.cate1:
+			cate_actual = 1;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate2:
+			cate_actual = 2;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate3:
+			cate_actual = 3;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate4:
+			cate_actual = 4;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate5:
+			cate_actual = 5;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate6:
+			cate_actual = 6;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate7:
+			cate_actual = 7;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -301,197 +387,119 @@ public class MainActivity extends Activity {
 
 	
 	
-	
-	private class MiTareaAsincrona extends AsyncTask<Double, Integer, Boolean> {
-    	
-    	@Override
-    	protected Boolean doInBackground(Double... params) {
-    		
-    		
-    		try {
-				currentLocation = getCurrentLocationViaJSON(params[0], params[1]);
-			} catch (Throwable e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		
-    		return true;
-    	}
-    	
-    	@Override
-    	protected void onProgressUpdate(Integer... values) {
-    	
-    	}
-    	
-    	@Override
-    	protected void onPreExecute() {
-   
-    	}
-    	
-    	@Override
-    	protected void onPostExecute(Boolean result) {
-    		if(result){
-    			Toast.makeText(MainActivity.this, "Ubicación Localizada: "+currentLocation, Toast.LENGTH_SHORT).show();
-    			//lblEstado.setText("Direccion:"+currentLocation);
-    			
-    			currentLocation = currentLocation.replace(" ", "%20");
-    			String[] parts = currentLocation.split("-");
-    			String currentLocationNew = parts[0];
-   
-    			String posicion = latitud + "a" + longitud;
-    			url = url + posicion;
-    			Log.i("TEST", currentLocation);
-    			// Creating volley request obj
-    			JsonArrayRequest movieReq = new JsonArrayRequest(url,
-    					new Response.Listener<JSONArray>() {
-    						@Override
-    						public void onResponse(JSONArray response) {
-    							Log.d(TAG, response.toString());
-    							hidePDialog();
-
-    							// Parsing json
-    							for (int i = 0; i < response.length(); i++) {
-    								try {
-
-    									JSONObject obj = response.getJSONObject(i);
-    									Movie movie = new Movie();
-    									movie.setName(obj.getString("name"));
-    									movie.setPicturepath(obj.getString("images"));
-    									movie.setLogo(obj.getString("logo"));
-    									movie.setPrice(obj.getString("price"));
-    											//.doubleValue());
-    									movie.setId(obj.getString("id"));
-
-    									// Description is json array
-    									/*JSONArray DescriptionArry = obj.getJSONArray("description");
-    									ArrayList<String> Description = new ArrayList<String>();
-    									for (int j = 0; j < DescriptionArry.length(); j++) {
-    										Description.add((String) DescriptionArry.get(j));
-    									}*/
-    									movie.setDescription(obj.getString("description"));
-    									movie.setTienda(obj.getString("tienda"));
-    									movie.setUser(obj.getString("user"));
-    									movie.setDireccion(obj.getString("direccion"));
-    									movie.setFirstname(obj.getString("firstname"));
-    									movie.setLastname(obj.getString("lastname"));
-    									movie.setTelefono(obj.getString("telefono"));
-    									movie.setLatitud(obj.getString("latitud"));
-    									movie.setLongitud(obj.getString("longitud"));
-
-    									// adding movie to movies array
-    									movieList.add(movie);
-
-    								} catch (JSONException e) {
-    									e.printStackTrace();
-    								}
-
-    							}
-
-    							// notifying list adapter about data changes
-    							// so that it renders the list view with updated data
-    							adapter.notifyDataSetChanged();
-    						
-    						}
-    					}, new Response.ErrorListener() {
-    						@Override
-    						public void onErrorResponse(VolleyError error) {
-    							VolleyLog.d(TAG, "Error: " + error.getMessage());
-    							hidePDialog();
-
-    						}
-    					});
-
-    			// Adding request to request queue
-    			AppController.getInstance().addToRequestQueue(movieReq);
-    		}
-    	}
-    	
-    	@Override
-    	protected void onCancelled() {
-    		Toast.makeText(MainActivity.this, "GPS cancelado!", Toast.LENGTH_SHORT).show();
-    	}
-    }
     
+	private void loadContent() {
+		pDialog = new ProgressDialog(this);
+		// Showing progress dialog before making http request
+		pDialog.setMessage("Cargando datos de nuestro servidor...");
+		pDialog.show();
+		
+		//lblEstado.setText("Direccion:"+currentLocation);
+		
+		
+		/*currentLocation = currentLocation.replace(" ", "%20");
+		String[] parts = currentLocation.split("-");
+		String currentLocationNew = parts[0];*/
+		String url = "http://superoffer.cl/admin/login/products/";
+		String posicion = latitud + "a" + longitud + "a" + cate_actual;
+		url = url + posicion;
+		Log.i("TEST", currentLocation);
+		// Creating volley request obj
+		JsonArrayRequest movieReq = new JsonArrayRequest(url,
+				new Response.Listener<JSONArray>() {
+					@Override
+					public void onResponse(JSONArray response) {
+						Log.d(TAG, response.toString());
+						JsonResponse = response.toString();
+						hidePDialog();
+						adapter.destroy();
+						// Parsing json
+						if(response.length()==0){
+							Toast.makeText(MainActivity.this, "No se encontraron ofertas", Toast.LENGTH_SHORT).show();
+						}
+						else {
+							
+		    				Toast.makeText(MainActivity.this, "Ofertas actualizadas", Toast.LENGTH_SHORT).show();
+		    			
+							}
+						for (int i = 0; i < response.length(); i++) {
+							try {
+
+								JSONObject obj = response.getJSONObject(i);
+								
+								Movie movie = new Movie();
+								movie.setName(obj.getString("name"));
+								movie.setPicturepath(obj.getString("images"));
+								movie.setLogo(obj.getString("logo"));
+								movie.setPrice(obj.getString("price"));
+										//.doubleValue());
+								movie.setId(obj.getString("id"));
+
+								// Description is json array
+								/*JSONArray DescriptionArry = obj.getJSONArray("description");
+								ArrayList<String> Description = new ArrayList<String>();
+								for (int j = 0; j < DescriptionArry.length(); j++) {
+									Description.add((String) DescriptionArry.get(j));
+								}*/
+								movie.setDescription(obj.getString("description"));
+								movie.setTienda(obj.getString("tienda"));
+								movie.setUser(obj.getString("user"));
+								movie.setDireccion(obj.getString("direccion"));
+								movie.setFirstname(obj.getString("firstname"));
+								movie.setLastname(obj.getString("lastname"));
+								movie.setTelefono(obj.getString("telefono"));
+								movie.setLatitud(obj.getString("latitud"));
+								movie.setLongitud(obj.getString("longitud"));
+
+								// adding movie to movies array
+								movieList.add(movie);
+
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+
+						}
+
+						// notifying list adapter about data changes
+						// so that it renders the list view with updated data
+						adapter.notifyDataSetChanged();
+					
+					}
+				}, new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						VolleyLog.d(TAG, "Error: " + error.getMessage());
+						hidePDialog();
+
+					}
+				});
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(movieReq);
+	
+}
+	
+	@Override
+    public void onBackPressed() {
+		
+		 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
+	        dialogo1.setTitle("Importante");  
+	        dialogo1.setMessage("Cerrar Aplicación ?");            
+	        dialogo1.setCancelable(false);  
+	        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
+	            public void onClick(DialogInterface dialogo1, int id) {  
+	                finish();  
+	            }  
+	        });  
+	        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+	            public void onClick(DialogInterface dialogo1, int id) {  
+	               
+	            }  
+	        });            
+	        dialogo1.show(); 
+
+    }
 	
 
-	public static JSONObject getLocationInfo(double lat, double lng) {
-
-	    HttpGet httpGet = new HttpGet("http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true");
-	    HttpClient client = new DefaultHttpClient();
-	    HttpResponse response;
-	    StringBuilder stringBuilder = new StringBuilder();
-
-	    try {
-	        response = client.execute(httpGet);
-	        HttpEntity entity = response.getEntity();
-	        InputStream stream = entity.getContent();
-	        int b;
-	        while ((b = stream.read()) != -1) {
-	            stringBuilder.append((char) b);
-	        }
-	    } catch (ClientProtocolException e) {
-	    } catch (IOException e) {
-	    }
-
-	    JSONObject jsonObject = new JSONObject();
-	    try {
-	        jsonObject = new JSONObject(stringBuilder.toString());
-	    } catch (JSONException e) {
-	        e.printStackTrace();
-	    }
-
-	    return jsonObject;
-	}
-
-	public static String getCurrentLocationViaJSON(double lat, double lng) throws Throwable {
-
-	    JSONObject jsonObj = getLocationInfo(lat, lng);
-	    Log.i("JSON string =>", jsonObj.toString());
-
-	    String currentLocation = "testing";
-	    String street_address = null;
-	    String postal_code = null; 
-
-	    try {
-	        String status = jsonObj.getString("status").toString();
-	        Log.i("status", status);
-
-	        if(status.equalsIgnoreCase("OK")){
-	            JSONArray results = jsonObj.getJSONArray("results");
-	            int i = 0;
-	            Log.i("i", i+ "," + results.length() ); //TODO delete this
-	            do{
-
-	                JSONObject r = results.getJSONObject(i);
-	                JSONArray typesArray = r.getJSONArray("types");
-	                String types = typesArray.getString(0);
-
-	                if(types.equalsIgnoreCase("street_address")){
-	                    street_address = r.getString("formatted_address");
-	                    Log.i("street_address", street_address);
-	                }else if(types.equalsIgnoreCase("postal_code")){
-	                    postal_code = r.getString("formatted_address");
-	                    Log.i("postal_code", postal_code);
-	                }
-
-	                if(street_address!=null){
-	                    currentLocation = street_address;
-	                    Log.i("Current Location =>", currentLocation); //Delete this
-	                    i = results.length();
-	                }
-
-	                i++;
-	            }while(i<results.length());
-
-	            Log.i("JSON Geo Locatoin =>", currentLocation);
-	            return currentLocation;
-	        }
-
-	    } catch (JSONException e) {
-	        Log.e("testing","Failed to load JSON");
-	        e.printStackTrace();
-	    }
-	    return null;
-	}
 
 }

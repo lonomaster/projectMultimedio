@@ -23,6 +23,8 @@ import cl.telematica.multimedio.model.Movie;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -34,11 +36,14 @@ import android.widget.Toast;
 
 public class Detalles  extends Activity {
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+	private List<Movie> movieList = new ArrayList<Movie>();
+	public String JsonResponse = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detalles);
-
+		getActionBar().setBackgroundDrawable(
+				new ColorDrawable(Color.parseColor("#33B5E5")));
 		//Localizar los controles
 		TextView name = (TextView)findViewById(R.id.Name);
 		if (imageLoader == null)
@@ -54,7 +59,9 @@ public class Detalles  extends Activity {
 		//Recuperamos la informaci�n pasada en el intent
 		final Bundle bundle = this.getIntent().getExtras();
 
-
+		//ArrayList<Movie> arrayList = (ArrayList<Movie>) bundle.getSerializable("datos");
+		//Log.i("",arrayList.toString());
+		JsonResponse = bundle.getString("datos");
 		name.setText(bundle.getString("name"));
 
 		picturepath.setImageUrl(bundle.getString("picturepath"), imageLoader);
@@ -77,6 +84,10 @@ public class Detalles  extends Activity {
             
              	b.putString("latitud", bundle.getString("latitud"));
              	b.putString("longitud", bundle.getString("longitud"));
+             	b.putString("name", bundle.getString("tienda"));
+             	b.putString("lat", bundle.getString("lat"));
+             	b.putString("lon", bundle.getString("lon"));
+             	b.putString("datos", JsonResponse);
              	
              	//A�adimos la informaci�n al intent
              	intent.putExtras(b);
@@ -93,13 +104,12 @@ public class Detalles  extends Activity {
 				HttpClient client = new DefaultHttpClient();
 				HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
 				HttpResponse response;
-				JSONObject json = new JSONObject();
 
 				try {
-					HttpPost post = new HttpPost("http://superoffer.cl/admin/login/actualizar/");
+					HttpPost post = new HttpPost("http://superoffer.cl/admin/login/actualizar/"+bundle.getString("id"));
 
 
-					List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);  
+					List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);  
 					nameValuePairs.add(new BasicNameValuePair("id", bundle.getString("id")));  
 					post.setEntity(new UrlEncodedFormEntity(nameValuePairs)); 
 
@@ -109,7 +119,9 @@ public class Detalles  extends Activity {
 					/*Checking response */
 					if(response!=null){
 						String temp = EntityUtils.toString(response.getEntity());
-						Log.i("tag", temp);      }
+						Log.i("tag", temp);    
+						  }
+					
 
 				} catch(Exception e) {
 					e.printStackTrace();
