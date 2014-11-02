@@ -11,10 +11,12 @@
             backward-compatibility can go here.
         -->
     </style>
-
+     <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#33B5E5</item>
+    </style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+       <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
     </style>
 
 </resources>

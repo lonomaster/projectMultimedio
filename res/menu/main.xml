@@ -25,33 +25,82 @@
           android:showAsAction="never"/>
     <!-- Help -->
     <item android:id="@+id/cate1"
-          android:title="Cate1" 
+          android:title="Comida casera" 
           android:showAsAction="never"/>
     
     
         <!-- Help -->
     <item android:id="@+id/cate2"
-          android:title="Cate2" 
+          android:title="Comida rápida" 
           android:showAsAction="never"/>
         <!-- Help -->
     <item android:id="@+id/cate3"
-          android:title="Cate3" 
+          android:title="Bebida alcohólica" 
           android:showAsAction="never"/>
         <!-- Help -->
     <item android:id="@+id/cate4"
-          android:title="Cate4" 
+          android:title="Mercadería" 
           android:showAsAction="never"/>
         <!-- Help -->
     <item android:id="@+id/cate5"
-          android:title="Cate5" 
+          android:title="Aseo y limpieza" 
           android:showAsAction="never"/>
         <!-- Help -->
     <item android:id="@+id/cate6"
-          android:title="Cate6" 
+          android:title="Clases particulares" 
           android:showAsAction="never"/>
         <!-- Help -->
     <item android:id="@+id/cate7"
-          android:title="Cate7" 
+          android:title="Comida a domicilio" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate8"
+          android:title="Eventos y fiestas" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate9"
+          android:title="Fletes y mudanzas" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate10"
+          android:title="Insumos" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate11"
+          android:title="Jardinería" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate12"
+          android:title="Servicio de mascotas" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate13"
+          android:title="Reparación y mantención" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate14"
+          android:title="Salud" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate15"
+          android:title="Mueblería" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate16"
+          android:title="Servicios informáticos" 
+          android:showAsAction="never"/>
+        <!-- Help -->
+    <item android:id="@+id/cate17"
+          android:title="Combustibles" 
+          android:showAsAction="never"/>
+    <!-- Help -->
+    <item android:id="@+id/cate18"
+          android:title="Hospedaje" 
+          android:showAsAction="never"/>
+    
+       <!-- Help -->
+    <item android:id="@+id/cate19"
+          android:title="Otros" 
           android:showAsAction="never"/>
     
     

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SuperOffer</string>
+    <string name="app_name">superOffer</string>
     <string name="action_settings">Actualizar</string>
     <string name="hello_world">Hello world!</string>
 </resources>

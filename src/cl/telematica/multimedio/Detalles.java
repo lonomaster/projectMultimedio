@@ -42,8 +42,6 @@ public class Detalles  extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detalles);
-		getActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.parseColor("#33B5E5")));
 		//Localizar los controles
 		TextView name = (TextView)findViewById(R.id.Name);
 		if (imageLoader == null)
@@ -56,6 +54,8 @@ public class Detalles  extends Activity {
 		TextView user = (TextView)findViewById(R.id.User);
 		TextView direccion = (TextView)findViewById(R.id.Direccion);
 		TextView telefono = (TextView)findViewById(R.id.Telefono);
+		TextView fecha = (TextView)findViewById(R.id.Fecha);
+		TextView visita = (TextView)findViewById(R.id.Visita);
 		//Recuperamos la informaci�n pasada en el intent
 		final Bundle bundle = this.getIntent().getExtras();
 
@@ -68,6 +68,8 @@ public class Detalles  extends Activity {
 
 		price.setText("$"+bundle.getString("price"));
 		description.setText("Descripción: "+bundle.getString("description"));
+		fecha.setText("Fecha activa hasta: "+bundle.getString("fecha"));
+		visita.setText("Visitas: "+bundle.getString("visitas"));
 		tienda.setText("Local: "+bundle.getString("tienda"));
 		user.setText("Email: "+bundle.getString("user"));
 		direccion.setText("Dirección: "+bundle.getString("direccion"));

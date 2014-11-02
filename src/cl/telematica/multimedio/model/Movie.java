@@ -9,6 +9,8 @@ public class Movie {
 	private String Id;
 	private String Price;
 	private String Description;
+	private String Fecha;
+	private String Visitas;
 	private String Tienda;
 	private String User;
 	private String Direccion;
@@ -37,6 +39,22 @@ public class Movie {
 
 	public void setName(String name) {
 		this.Name = name;
+	}
+	
+	public String getVisitas() {
+		return Visitas;
+	}
+
+	public void setVisitas(String visitas) {
+		this.Visitas = visitas;
+	}
+	
+	public String getFecha() {
+		return Fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.Fecha = fecha;
 	}
 
 	public String getPicturepath() {

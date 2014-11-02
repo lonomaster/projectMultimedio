@@ -18,6 +18,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -32,6 +34,7 @@ public class Mapa extends FragmentActivity {
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.mapa);
+
     final Bundle bundle = this.getIntent().getExtras();
 
     JsonResponse = bundle.getString("datos");
@@ -103,7 +106,7 @@ private void updateMarkerWithCircle(LatLng position) {
 }
 
 private void drawMarkerWithCircle(LatLng position){
-    double radiusInMeters = 700.0;
+    double radiusInMeters = 600.0;
     int strokeColor = 0xff33B5E5; //red outline
     int shadeColor = 0x4433B5E5; //opaque red fill
 

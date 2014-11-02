@@ -33,6 +33,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -98,19 +100,28 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		// changing action bar color
-				getActionBar().setBackgroundDrawable(
-						new ColorDrawable(Color.parseColor("#33B5E5")));
+		
+				if (!exiteConexionInternet()){
+					 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
+				        dialogo1.setTitle("Importante");  
+				        dialogo1.setMessage("Se necesita de conexión a internet");            
+				        dialogo1.setCancelable(false);  
+				        dialogo1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
+				            public void onClick(DialogInterface dialogo1, int id) {  
+				                finish();  
+				            }  
+				        });              
+				        dialogo1.show(); 
+				}
+				else {
+				
 		listView = (ListView) findViewById(R.id.list);
 		adapter = new CustomListAdapter(this, movieList);
 		listView.setAdapter(adapter);
 
-		pDialog = new ProgressDialog(this);
-		// Showing progress dialog before making http request
-		pDialog.setMessage("Localizando...");
-		pDialog.show();
 		
 	       
 		comenzarLocalizacion();
@@ -140,6 +151,8 @@ public class MainActivity extends Activity {
             	b.putString("tienda", obj_itemDetails.getTienda());
             	b.putString("user", obj_itemDetails.getUser());
             	b.putString("direccion", obj_itemDetails.getDireccion());
+            	b.putString("visitas", obj_itemDetails.getVisitas());
+            	b.putString("fecha", obj_itemDetails.getFecha());
             	b.putString("firstname", obj_itemDetails.getFirstname());
             	b.putString("lastname", obj_itemDetails.getLastname());
             	b.putString("telefono", obj_itemDetails.getTelefono());
@@ -201,16 +214,27 @@ public class MainActivity extends Activity {
 
 		
 	}
+	
+}
 
 	
 	
 	private void comenzarLocalizacion()
     {
+		
 	
 		//Obtenemos una referencia al LocationManager
     	locManager = 
     		(LocationManager)getSystemService(Context.LOCATION_SERVICE);
     	
+    
+		if (locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+	        //Do what you need if enabled...
+	    
+			pDialog = new ProgressDialog(this);
+			// Showing progress dialog before making http request
+			pDialog.setMessage("Localizando...");
+			pDialog.show();
     	//Obtenemos la �ltima posici�n conocida
     	Location loc = 
     		locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -237,7 +261,19 @@ public class MainActivity extends Activity {
     	
     	locManager.requestLocationUpdates(
     			LocationManager.NETWORK_PROVIDER, 60000,200, locListener);
-    	
+		}
+		else {
+			 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
+		        dialogo1.setTitle("Importante");  
+		        dialogo1.setMessage("Se necesita usar el servicio de ubicación de redes inalámbricas. Vaya a Config > Servicios de ubicación > Usar redes inalámbricas");            
+		        dialogo1.setCancelable(false);  
+		        dialogo1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
+		            public void onClick(DialogInterface dialogo1, int id) {  
+		                finish();  
+		            }  
+		        });              
+		        dialogo1.show(); 
+		}
    
     }
 
@@ -379,6 +415,66 @@ public class MainActivity extends Activity {
 			loadContent();
 			adapter.notifyDataSetChanged();
 			return true;
+		case R.id.cate8:
+			cate_actual = 8;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate9:
+			cate_actual = 9;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate10:
+			cate_actual = 10;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate11:
+			cate_actual = 11;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate12:
+			cate_actual = 12;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate13:
+			cate_actual = 13;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate14:
+			cate_actual = 14;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate15:
+			cate_actual = 15;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate16:
+			cate_actual = 16;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate17:
+			cate_actual = 17;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate18:
+			cate_actual = 18;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.cate19:
+			cate_actual = 19;
+			loadContent();
+			adapter.notifyDataSetChanged();
+			return true;
 		
 		default:
 			return super.onOptionsItemSelected(item);
@@ -445,6 +541,8 @@ public class MainActivity extends Activity {
 								movie.setTienda(obj.getString("tienda"));
 								movie.setUser(obj.getString("user"));
 								movie.setDireccion(obj.getString("direccion"));
+								movie.setVisitas(obj.getString("visitas"));
+								movie.setFecha(obj.getString("disable_on"));
 								movie.setFirstname(obj.getString("firstname"));
 								movie.setLastname(obj.getString("lastname"));
 								movie.setTelefono(obj.getString("telefono"));
@@ -500,6 +598,14 @@ public class MainActivity extends Activity {
 
     }
 	
-
+	public boolean exiteConexionInternet() {
+		   ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		   NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		   if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+		      return true;
+		   }
+		   return false;
+		}
+	
 
 }

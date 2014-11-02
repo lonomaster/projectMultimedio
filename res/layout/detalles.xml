@@ -1,172 +1,222 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
-<LinearLayout 
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/feed_bg"
-    android:orientation="vertical" >
+    android:background="@color/feed_bg" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="@dimen/feed_item_margin"
-        android:layout_marginLeft="@dimen/feed_item_margin"
-        android:layout_marginRight="@dimen/feed_item_margin"
-        android:layout_marginTop="@dimen/feed_item_margin"
-        android:background="@drawable/bg_parent_rounded_corner"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/feed_item_padding_top_bottom"
-        android:paddingTop="@dimen/feed_item_padding_top_bottom" >
+   
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/feed_item_padding_left_right"
-            android:paddingRight="@dimen/feed_item_padding_left_right" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/feed_bg"
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="70dp"
+                android:layout_marginLeft="@dimen/feed_item_margin"
+                android:layout_marginRight="@dimen/feed_item_margin"
+                android:layout_marginTop="@dimen/feed_item_margin"
+                android:background="@drawable/bg_parent_rounded_corner"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/feed_item_profile_info_padd" >
-
-                <RelativeLayout
+                android:paddingBottom="@dimen/feed_item_padding_top_bottom"
+                android:paddingTop="@dimen/feed_item_padding_top_bottom" >
+ <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" >
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp" >
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/feed_item_padding_left_right"
+                    android:paddingRight="@dimen/feed_item_padding_left_right" >
 
-                    <!-- Thumbnail Image -->
-
-                    <com.android.volley.toolbox.NetworkImageView
-                        android:id="@+id/Picturepath"
-                        android:layout_width="fill_parent"
-                        android:layout_height="200dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginRight="8dp" />
-
-                    <!-- Movie Name -->
-
-                    <TextView
-                        android:id="@+id/Name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/Picturepath"
-                        android:textColor="@color/timestamp"
-                         android:textSize="20dp"
-                        android:textStyle="bold" />
-                   
-
-
-                    <!-- Price -->
-
-                    <TextView
-                        android:id="@+id/Price"
+                    <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Name"
-                        android:layout_marginTop="1dip"
-                         android:textSize="25dp"
-                        android:textColor="@color/link" />
-                    <!--
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/feed_item_profile_info_padd" >
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp" >
+
+                            <!-- Thumbnail Image -->
+
+                            <com.android.volley.toolbox.NetworkImageView
+                                android:id="@+id/Picturepath"
+                                android:layout_width="fill_parent"
+                                android:layout_height="200dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginRight="8dp" />
+
+                            <!-- Movie Name -->
+
+                            <TextView
+                                android:id="@+id/Name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Picturepath"
+                                android:textColor="@color/timestamp"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+                            <!-- Price -->
+
+                            <TextView
+                                android:id="@+id/Price"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Name"
+                                android:layout_marginTop="1dip"
+                                android:textColor="@color/link"
+                                android:textSize="45dp" />
+                            <!--
         android:textColor="@color/Price"
         android:textSize="@dimen/Price"
-                    -->
+                            -->
 
 
-                    <!-- Description -->
+                            <!-- Description -->
 
-                    <TextView
-                        android:id="@+id/Description"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/Price"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/timestamp" />
-                    <!--
+                            <TextView
+                                android:id="@+id/Description"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Price"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/timestamp" />
+                            
+                            <TextView
+                                android:id="@+id/Fecha"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Description"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/timestamp" />
+                            
+                            <TextView
+                                android:id="@+id/Visita"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Fecha"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/timestamp" />
+                            <!--
         android:textColor="@color/Description"
         android:textSize="@dimen/Description"
-                    -->
+                            -->
 
 
-                    <!-- Description -->
+                            <!-- Description -->
 
-                    <TextView
-                        android:id="@+id/Tienda"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/Description"
-                        android:textColor="@color/timestamp"
-                        android:layout_marginTop="5dp" />
-                    <!--
+                            <TextView
+                                android:id="@+id/Tienda"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Visita"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/timestamp" />
+                            <!--
         android:textColor="@color/Description"
         android:textSize="@dimen/Description"
-                    -->
+                            -->
 
 
-                    <!-- Description -->
+                            <!-- Description -->
 
-                    <TextView
-                        android:id="@+id/User"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/Tienda"
-                        android:textColor="@color/timestamp"
-                        android:layout_marginTop="5dp" />
-                    <!--
+                            <TextView
+                                android:id="@+id/User"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Tienda"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/timestamp" />
+                            <!--
         android:textColor="@color/Description"
         android:textSize="@dimen/Description"
-                    -->
+                            -->
 
 
-                    <!-- Description -->
+                            <!-- Description -->
 
-                    <TextView
-                        android:id="@+id/Direccion"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/User"
-                        android:textColor="@color/timestamp"
-                        android:layout_marginTop="5dp" />
+                            <TextView
+                                android:id="@+id/Direccion"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/User"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/timestamp" />
 
-                    <!--
+                            <!--
         android:textColor="@color/Description"
         android:textSize="@dimen/Description"
-                    -->
-                    <!-- Description -->
+                            -->
+                            <!-- Description -->
 
-                    <TextView
-                        android:id="@+id/Telefono"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/Direccion"
-                        android:textColor="@color/timestamp"
-                        android:layout_marginTop="5dp" />
-                    <!--
+                            <TextView
+                                android:id="@+id/Telefono"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/Direccion"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/timestamp" />
+                            <!--
         android:textColor="@color/Description"
         android:textSize="@dimen/Description"
-                    -->
-                     <Button
-                android:id="@+id/Buttom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Telefono"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="30dp"
-                android:background="#99CC00"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
-                android:text="Ver Mapa" />
+                            -->
 
-                
-                </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                 </ScrollView>
             </LinearLayout>
+        </LinearLayout>
+   
+
+    <LinearLayout
+        android:id="@+id/columnas"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="@dimen/feed_item_margin"
+            android:layout_marginTop="@dimen/feed_item_margin"
+            android:orientation="vertical"
+   >
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <Button
+                            android:id="@+id/Buttom"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="30dp"
+                            android:background="#669900"
+                            android:drawableLeft="@drawable/ic_action_place"
+                            android:paddingLeft="50dp"
+                            android:paddingRight="50dp"
+                            android:text="Ver Mapa"
+                            android:textColor="#F0F0F0"
+                            android:textColorHint="#669900" />
+
+                    </RelativeLayout>
+     
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
-</ScrollView>
+</RelativeLayout>

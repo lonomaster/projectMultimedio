@@ -72,7 +72,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-               android:layout_height="20dp"
+               android:layout_height="30dp"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/feed_item_profile_info_padd" >
 <!-- 
@@ -94,7 +94,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
-            android:hint="Ingrese su búsqueda" 
+            android:padding="5dp"
+            android:hint="Buscar..." 
             android:ems="10" >
             
             <requestFocus />
