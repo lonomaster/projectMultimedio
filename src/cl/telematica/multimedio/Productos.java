@@ -1,6 +1,6 @@
 package cl.telematica.multimedio;
 
-import cl.telematica.multimedio.adater.CustomListAdapter;
+import cl.telematica.multimedio.adater.adapterProduct;
 import cl.telematica.multimedio.app.AppController;
 import cl.telematica.multimedio.model.Movie;
 
@@ -69,7 +69,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 
 
-public class MainActivity extends Activity {
+public class Productos extends Activity {
 	// Log tag
 	private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
 	private ProgressDialog pDialog;
 	private ArrayList<Movie> movieList = new ArrayList<Movie>();
 	private ListView listView;
-	private CustomListAdapter adapter;
+	private adapterProduct adapter;
 
 	private LocationManager locManager;
 	private LocationListener locListener;
@@ -97,13 +97,19 @@ public class MainActivity extends Activity {
 	public String lon;
 	private boolean mensaje = true;
 	public String JsonResponse = "";
+	public String Email = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.productos);
 		
+		final Bundle bundle = this.getIntent().getExtras();
+		
+		Email = bundle.getString("user");
+		Email = Email.replace("@", "qqqqq");
+		Log.i("Email", Email);
 				if (!exiteConexionInternet()){
 					 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
 				        dialogo1.setTitle("Importante");  
@@ -119,7 +125,7 @@ public class MainActivity extends Activity {
 				else {
 				
 		listView = (ListView) findViewById(R.id.list);
-		adapter = new CustomListAdapter(this, movieList);
+		adapter = new adapterProduct(this, movieList);
 		listView.setAdapter(adapter);
 
 		
@@ -138,7 +144,7 @@ public class MainActivity extends Activity {
       
             	
             	//Creamos el Intent
-            	Intent intent = new Intent(MainActivity.this, Productos.class);
+            	Intent intent = new Intent(Productos.this, Detalles.class);
             	
             	//Creamos la informaci�n a pasar entre actividades
             	Bundle b = new Bundle(); 
@@ -177,7 +183,33 @@ public class MainActivity extends Activity {
       });
         
         
-	
+		
+		final EditText editTxt = (EditText) findViewById(R.id.editText1); 
+		editTxt.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				System.out.println("Text ["+s+"] - Start ["+start+"] - Before ["+before+"] - Count ["+count+"]");
+				if (count < before) {
+					// We're deleting char so we need to reset the adapter data
+					adapter.resetData();
+				}
+					
+				adapter.getFilter().filter(s.toString());
+				//text.setText(s.toString());
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+			}); 
 	
 		
 		
@@ -218,7 +250,7 @@ public class MainActivity extends Activity {
     	locListener = new LocationListener() {
 	    	public void onLocationChanged(Location location) {
 	    		
-	    		Toast.makeText(MainActivity.this, "Ubicación Localizada", Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(Productos.this, "Ubicación Localizada", Toast.LENGTH_SHORT).show();
 	    		mostrarPosicion(location);
 	    	}
 	    	public void onProviderDisabled(String provider){
@@ -267,7 +299,7 @@ public class MainActivity extends Activity {
 			adapter.notifyDataSetChanged();
     		Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongitude())));
     	}
-    	else Toast.makeText(MainActivity.this, "Ubicación no Localizada", Toast.LENGTH_SHORT).show();
+    	else Toast.makeText(Productos.this, "Ubicación no Localizada", Toast.LENGTH_SHORT).show();
 		
  
     }
@@ -321,7 +353,7 @@ public class MainActivity extends Activity {
 		case R.id.action_map:
 			
 			//Creamos el Intent
-        	Intent intent = new Intent(MainActivity.this, Mapa.class);
+        	Intent intent = new Intent(Productos.this, Mapa.class);
         	
         	//Creamos la informaci�n a pasar entre actividades
         	Bundle b = new Bundle(); 
@@ -470,8 +502,8 @@ public class MainActivity extends Activity {
 		/*currentLocation = currentLocation.replace(" ", "%20");
 		String[] parts = currentLocation.split("-");
 		String currentLocationNew = parts[0];*/
-		String url = "http://superoffer.cl/admin/login/tiendas/";
-		String posicion = latitud + "a" + longitud + "a" + cate_actual;
+		String url = "http://superoffer.cl/admin/login/products/";
+		String posicion = latitud + "qqqqq" + longitud + "qqqqq" + cate_actual + "qqqqq" + Email;
 		url = url + posicion;
 		Log.i("TEST", currentLocation);
 		// Creating volley request obj
@@ -485,11 +517,11 @@ public class MainActivity extends Activity {
 						adapter.destroy();
 						// Parsing json
 						if(response.length()==0){
-							Toast.makeText(MainActivity.this, "No se encontraron ofertas", Toast.LENGTH_SHORT).show();
+							Toast.makeText(Productos.this, "No se encontraron ofertas", Toast.LENGTH_SHORT).show();
 						}
 						else {
 							
-		    				Toast.makeText(MainActivity.this, "Ofertas actualizadas", Toast.LENGTH_SHORT).show();
+		    				Toast.makeText(Productos.this, "Ofertas actualizadas", Toast.LENGTH_SHORT).show();
 		    			
 							}
 						for (int i = 0; i < response.length(); i++) {
@@ -551,27 +583,7 @@ public class MainActivity extends Activity {
 	
 }
 	
-	@Override
-    public void onBackPressed() {
 		
-		 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
-	        dialogo1.setTitle("Importante");  
-	        dialogo1.setMessage("Cerrar Aplicación ?");            
-	        dialogo1.setCancelable(false);  
-	        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
-	            public void onClick(DialogInterface dialogo1, int id) {  
-	                finish();  
-	            }  
-	        });  
-	        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
-	            public void onClick(DialogInterface dialogo1, int id) {  
-	               
-	            }  
-	        });            
-	        dialogo1.show(); 
-
-    }
-	
 	public boolean exiteConexionInternet() {
 		   ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		   NetworkInfo netInfo = cm.getActiveNetworkInfo();

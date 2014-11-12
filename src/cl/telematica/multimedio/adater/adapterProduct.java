@@ -33,7 +33,7 @@ import android.widget.Filter.*;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-public class CustomListAdapter extends BaseAdapter {
+public class adapterProduct extends BaseAdapter {
 	private Activity activity;
 	private LayoutInflater inflater;
 	private List<Movie> movieItems;
@@ -41,7 +41,7 @@ public class CustomListAdapter extends BaseAdapter {
 	private Filter listFilter;
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-	public CustomListAdapter(Activity activity, List<Movie> movieItems) {
+	public adapterProduct(Activity activity, List<Movie> movieItems) {
 		this.activity = activity;
 		this.movieItems = movieItems;
 		this.originalMovieItems = movieItems;
@@ -69,14 +69,14 @@ public class CustomListAdapter extends BaseAdapter {
 			inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null)
-			convertView = inflater.inflate(R.layout.list_tiendas, null);
+			convertView = inflater.inflate(R.layout.list_row, null);
 
 		if (imageLoader == null)
 			imageLoader = AppController.getInstance().getImageLoader();
 		NetworkImageView thumbNail = (NetworkImageView) convertView
 				.findViewById(R.id.thumbnail);
 		TextView Name = (TextView) convertView.findViewById(R.id.Name);
-
+		TextView Price = (TextView) convertView.findViewById(R.id.Price);
 		//TextView Description = (TextView) convertView.findViewById(R.id.Description);
 		//TextView Id = (TextView) convertView.findViewById(R.id.releaseId);
 
@@ -85,11 +85,13 @@ public class CustomListAdapter extends BaseAdapter {
 		
 
 		// thumbnail image
-		thumbNail.setImageUrl(m.getLogo(), imageLoader);
+		thumbNail.setImageUrl(m.getPicturepath(), imageLoader);
 		
 		// Name
-		Name.setText(m.getTienda());
+		Name.setText(m.getName());
 		
+		// Price
+		Price.setText("$" + String.valueOf(m.getPrice()));
 		
 		//Description.setText("Descripcion: " + String.valueOf(m.getDescription()));
 

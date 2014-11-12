@@ -436,18 +436,18 @@ containing a value of this type.
         public static final int price_tag=0x7f02002b;
     }
     public static final class id {
-        public static final int Buttom=0x7f070023;
-        public static final int Description=0x7f07001c;
-        public static final int Direccion=0x7f070021;
-        public static final int Fecha=0x7f07001d;
-        public static final int Mapa=0x7f070025;
-        public static final int Name=0x7f07001a;
-        public static final int Picturepath=0x7f070019;
-        public static final int Price=0x7f07001b;
-        public static final int Telefono=0x7f070022;
-        public static final int Tienda=0x7f07001f;
-        public static final int User=0x7f070020;
-        public static final int Visita=0x7f07001e;
+        public static final int Buttom=0x7f070021;
+        public static final int Description=0x7f070019;
+        public static final int Direccion=0x7f07001e;
+        public static final int Fecha=0x7f07001a;
+        public static final int Mapa=0x7f070023;
+        public static final int Name=0x7f070017;
+        public static final int Picturepath=0x7f070016;
+        public static final int Price=0x7f070018;
+        public static final int Telefono=0x7f07001f;
+        public static final int Tienda=0x7f07001c;
+        public static final int User=0x7f07001d;
+        public static final int Visita=0x7f07001b;
         public static final int action_map=0x7f070026;
         public static final int action_refresh=0x7f070027;
         public static final int all=0x7f070028;
@@ -475,13 +475,13 @@ containing a value of this type.
         public static final int cate8=0x7f070030;
         public static final int cate9=0x7f070031;
         public static final int classic=0x7f070011;
-        public static final int columnas=0x7f070015;
-        public static final int editText1=0x7f070017;
+        public static final int columnas=0x7f070020;
+        public static final int editText1=0x7f070025;
         public static final int grayscale=0x7f070012;
         public static final int holo_dark=0x7f070005;
         public static final int holo_light=0x7f070006;
         public static final int hybrid=0x7f070004;
-        public static final int imageView1=0x7f070016;
+        public static final int imageView1=0x7f070024;
         public static final int list=0x7f070014;
         public static final int match_parent=0x7f07000c;
         public static final int monochrome=0x7f070013;
@@ -490,11 +490,11 @@ containing a value of this type.
         public static final int production=0x7f070007;
         public static final int sandbox=0x7f070008;
         public static final int satellite=0x7f070002;
-        public static final int scroll=0x7f070018;
+        public static final int scroll=0x7f070015;
         public static final int selectionDetails=0x7f07000b;
         public static final int strict_sandbox=0x7f070009;
         public static final int terrain=0x7f070003;
-        public static final int thumbnail=0x7f070024;
+        public static final int thumbnail=0x7f070022;
         public static final int wrap_content=0x7f07000d;
     }
     public static final class integer {
@@ -504,7 +504,9 @@ containing a value of this type.
         public static final int activity_main=0x7f030000;
         public static final int detalles=0x7f030001;
         public static final int list_row=0x7f030002;
-        public static final int mapa=0x7f030003;
+        public static final int list_tiendas=0x7f030003;
+        public static final int mapa=0x7f030004;
+        public static final int productos=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
