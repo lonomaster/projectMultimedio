@@ -631,7 +631,6 @@ containing a value of this type.
          */
         public static final int AppBaseTheme=0x7f040005;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f040007;
         public static final int MyActionBarTheme=0x7f040006;
