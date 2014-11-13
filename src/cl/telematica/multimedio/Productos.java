@@ -250,7 +250,7 @@ public class Productos extends Activity {
     	locListener = new LocationListener() {
 	    	public void onLocationChanged(Location location) {
 	    		
-	    		Toast.makeText(Productos.this, "Ubicación Localizada", Toast.LENGTH_SHORT).show();
+	    		//Toast.makeText(Productos.this, "Ubicación Localizada", Toast.LENGTH_SHORT).show();
 	    		mostrarPosicion(location);
 	    	}
 	    	public void onProviderDisabled(String provider){
@@ -519,11 +519,7 @@ public class Productos extends Activity {
 						if(response.length()==0){
 							Toast.makeText(Productos.this, "No se encontraron ofertas", Toast.LENGTH_SHORT).show();
 						}
-						else {
-							
-		    				Toast.makeText(Productos.this, "Ofertas actualizadas", Toast.LENGTH_SHORT).show();
-		    			
-							}
+						
 						for (int i = 0; i < response.length(); i++) {
 							try {
 

@@ -105,16 +105,25 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 				if (!exiteConexionInternet()){
-					 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
-				        dialogo1.setTitle("Importante");  
-				        dialogo1.setMessage("Se necesita de conexión a internet");            
-				        dialogo1.setCancelable(false);  
-				        dialogo1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
-				            public void onClick(DialogInterface dialogo1, int id) {  
-				                finish();  
-				            }  
-				        });              
-				        dialogo1.show(); 
+					AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
+			        dialogo1.setTitle("Importante");  
+			        dialogo1.setMessage("Se necesita de conexión de Internet.\nIngrese a las opciones de configuración y activelo.");            
+			        dialogo1.setCancelable(false);  
+			        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+			            public void onClick(DialogInterface dialogo1, int id) {  
+			                
+			            }  
+			        });  
+			        dialogo1.setPositiveButton("Configuraciones", new DialogInterface.OnClickListener() {  
+			            public void onClick(DialogInterface dialogo1, int id) { 
+			            	
+			                    startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
+			                   
+			               
+			               
+			            }   
+			        });            
+			        dialogo1.show();
 				}
 				else {
 				
@@ -237,16 +246,29 @@ public class MainActivity extends Activity {
     			LocationManager.NETWORK_PROVIDER, 60000,200, locListener);
 		}
 		else {
-			 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
-		        dialogo1.setTitle("Importante");  
-		        dialogo1.setMessage("Se necesita usar el servicio de ubicación de redes inalámbricas. Vaya a Config > Servicios de ubicación > Usar redes inalámbricas");            
-		        dialogo1.setCancelable(false);  
-		        dialogo1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
-		            public void onClick(DialogInterface dialogo1, int id) {  
-		                finish();  
-		            }  
-		        });              
-		        dialogo1.show(); 
+			
+			AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
+	        dialogo1.setTitle("Importante");  
+	        dialogo1.setMessage("Se necesita usar el servicio de ubicación de redes inalámbricas.\nIngrese a las opciones de configuración y activelo.");            
+	        dialogo1.setCancelable(false);  
+	        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+	            public void onClick(DialogInterface dialogo1, int id) {  
+	                
+	            }  
+	        });  
+	        dialogo1.setPositiveButton("Configuraciones", new DialogInterface.OnClickListener() {  
+	            public void onClick(DialogInterface dialogo1, int id) { 
+	            	
+	                    startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+	             
+	               
+	               
+	            }   
+	        });            
+	        dialogo1.show();
+			
+			
+			
 		}
    
     }
