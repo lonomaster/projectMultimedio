@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -38,6 +39,8 @@ public class Detalles  extends Activity {
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 	private List<Movie> movieList = new ArrayList<Movie>();
 	public String JsonResponse = "";
+	public String telefo = "";
+	public String em = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,9 +54,9 @@ public class Detalles  extends Activity {
 		TextView price = (TextView)findViewById(R.id.Price);
 		TextView description = (TextView)findViewById(R.id.Description);
 		TextView tienda = (TextView)findViewById(R.id.Tienda);
-		TextView user = (TextView)findViewById(R.id.User);
+		//TextView user = (TextView)findViewById(R.id.User);
 		TextView direccion = (TextView)findViewById(R.id.Direccion);
-		TextView telefono = (TextView)findViewById(R.id.Telefono);
+		//TextView telefono = (TextView)findViewById(R.id.Telefono);
 		TextView fecha = (TextView)findViewById(R.id.Fecha);
 		TextView visita = (TextView)findViewById(R.id.Visita);
 		//Recuperamos la informaci�n pasada en el intent
@@ -71,9 +74,10 @@ public class Detalles  extends Activity {
 		fecha.setText("Fecha activa hasta: "+bundle.getString("fecha"));
 		visita.setText("Visitas: "+bundle.getString("visitas"));
 		tienda.setText("Local: "+bundle.getString("tienda"));
-		user.setText("Email: "+bundle.getString("user"));
+		//user.setText("Email: "+bundle.getString("user"));
 		direccion.setText("Dirección: "+bundle.getString("direccion"));
-		telefono.setText("Telefono: "+bundle.getString("telefono"));
+		telefo = bundle.getString("telefono");
+		em = bundle.getString("user");
 		
 		 final Button button = (Button) findViewById(R.id.Buttom);
          button.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +102,30 @@ public class Detalles  extends Activity {
                  startActivity(intent);   
              }
          });
+         
+         final Button phone = (Button) findViewById(R.id.Telefono);
+         phone.setText(telefo);
+         phone.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+            	 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telefo));
+            	 startActivity(intent); 
+             }
+         });
+         
+         final Button ema = (Button) findViewById(R.id.Email);
+         ema.setText(em);
+         ema.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+            	 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                         "mailto",em, null));
+             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Cliente SuperOffer");
+             startActivity(Intent.createChooser(emailIntent, "Send email..."));
+             }
+         });
 
+         
+         
+         
 		Thread t = new Thread() {
 
 			public void run() {

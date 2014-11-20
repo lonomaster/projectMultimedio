@@ -12,12 +12,12 @@
     <item android:id="@+id/action_map"
           android:icon="@drawable/ic_action_place"
           android:title="Map" 
-          android:showAsAction="ifRoom" />
+          android:showAsAction="always" />
     
     <item android:id="@+id/action_refresh"
           android:icon="@drawable/ic_action_refresh"
           android:title="Refresh" 
-          android:showAsAction="ifRoom" />
+          android:showAsAction="always" />
     
     <!-- Help -->
     <item android:id="@+id/all"

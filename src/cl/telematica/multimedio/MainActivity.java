@@ -104,28 +104,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-				if (!exiteConexionInternet()){
-					AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
-			        dialogo1.setTitle("Importante");  
-			        dialogo1.setMessage("Se necesita de conexión de Internet.\nIngrese a las opciones de configuración y activelo.");            
-			        dialogo1.setCancelable(false);  
-			        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
-			            public void onClick(DialogInterface dialogo1, int id) {  
-			                
-			            }  
-			        });  
-			        dialogo1.setPositiveButton("Configuraciones", new DialogInterface.OnClickListener() {  
-			            public void onClick(DialogInterface dialogo1, int id) { 
-			            	
-			                    startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
-			                   
-			               
-			               
-			            }   
-			        });            
-			        dialogo1.show();
-				}
-				else {
+				
 				
 		listView = (ListView) findViewById(R.id.list);
 		adapter = new CustomListAdapter(this, movieList);
@@ -133,7 +112,7 @@ public class MainActivity extends Activity {
 
 		
 	       
-		comenzarLocalizacion();
+		
 
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -188,15 +167,6 @@ public class MainActivity extends Activity {
         
 	
 	
-		
-		
-		
-		
-		
-		 
-
-		
-	}
 	
 }
 
@@ -589,11 +559,10 @@ public class MainActivity extends Activity {
 	            public void onClick(DialogInterface dialogo1, int id) {  
 	               
 	            }  
-	        });            
+	        });             
 	        dialogo1.show(); 
 
-    }
-	
+    } 
 	public boolean exiteConexionInternet() {
 		   ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		   NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -602,6 +571,35 @@ public class MainActivity extends Activity {
 		   }
 		   return false;
 		}
+	 
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (!exiteConexionInternet()){
+			AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
+	        dialogo1.setTitle("Importante");  
+	        dialogo1.setMessage("Se necesita de conexión de Internet.\nIngrese a las opciones de configuración y activelo.");            
+	        dialogo1.setCancelable(false);  
+	        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+	            public void onClick(DialogInterface dialogo1, int id) {  
+	                
+	            }  
+	        });  
+	        dialogo1.setPositiveButton("Configuraciones", new DialogInterface.OnClickListener() {  
+	            public void onClick(DialogInterface dialogo1, int id) { 
+	            	
+	                    startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
+	                   
+	               
+	               
+	            }   
+	        });            
+	        dialogo1.show();
+		}
+		else {
+			comenzarLocalizacion();
+		}
+	}
 	
 
 }
